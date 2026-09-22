@@ -57,6 +57,7 @@ import com.albertoborsetta.formscanner.gui.ManageTemplateFrame;
 import com.albertoborsetta.formscanner.gui.OptionsFrame;
 import com.albertoborsetta.formscanner.gui.RenameFileFrame;
 import com.albertoborsetta.formscanner.gui.ResultsGridFrame;
+import com.albertoborsetta.formscanner.gui.ReviewResultsFrame;
 
 public class FormScannerModel {
 	
@@ -93,6 +94,8 @@ public class FormScannerModel {
 	private Integer threshold;
 	private Integer density;
 	private ResultsGridFrame resultsGridFrame;
+
+	private ReviewResultsFrame reviewResultsFrame;
 	private FormTemplate filledForm;
 	private Integer shapeSize;
 	private ShapeType shapeType;
@@ -101,6 +104,7 @@ public class FormScannerModel {
 	private Rectangle manageTemplateFramePosition;
 	private Rectangle imageFramePosition;
 	private Rectangle resultsGridFramePosition;
+	private Rectangle reviewResultsFramePosition;
 	private Rectangle defaultPosition;
 	private Rectangle aboutFramePosition;
 	private Rectangle optionsFramePosition;
@@ -478,6 +482,32 @@ public class FormScannerModel {
 		view.arrangeFrame(resultsGridFrame);
 	}
 
+	public HashMap<String, FormTemplate> getFilledForms() {
+		return filledForms;
+	}
+
+	public BufferedImage getImage(String name) {
+		for (File file : openedFiles.values()) {
+			if (FilenameUtils.removeExtension(file.getName()).equals(name)) {
+				try {
+					return ImageIO.read(file);
+				} catch (IOException e) {
+					logger.warn("Error while reading image {}", file.getAbsolutePath(), e);
+				}
+			}
+		}
+		return null;
+	}
+
+	public void createReviewResultsFrame() {
+		if (reviewResultsFrame == null) {
+			reviewResultsFrame = new ReviewResultsFrame(this);
+		} else {
+			reviewResultsFrame.updateReviewResults();
+		}
+		view.arrangeFrame(reviewResultsFrame);
+	}
+
 	private void updateFileList(Integer index, File file) {
 		openedFiles.remove(index);
 		openedFiles.put(index, file);
@@ -534,6 +564,10 @@ public class FormScannerModel {
 		case MANAGE_TEMPLATE_FRAME:
 			view.disposeFrame(imageFrame);
 			imageFrame = null;
+			break;
+		case REVIEW_RESULTS_FRAME:
+			view.disposeFrame(reviewResultsFrame);
+			reviewResultsFrame = null;
 			break;
 		default:
 			break;
@@ -947,6 +981,8 @@ public class FormScannerModel {
 			return imageFramePosition;
 		case RESULTS_GRID_FRAME:
 			return resultsGridFramePosition;
+		case REVIEW_RESULTS_FRAME:
+			return reviewResultsFramePosition;
 		case ABOUT_FRAME:
 			return aboutFramePosition;
 		case OPTIONS_FRAME:
@@ -982,6 +1018,9 @@ public class FormScannerModel {
 			break;
 		case RESULTS_GRID_FRAME:
 			resultsGridFramePosition = position;
+			break;
+		case REVIEW_RESULTS_FRAME:
+			reviewResultsFramePosition = position;
 			break;
 		case ABOUT_FRAME:
 			aboutFramePosition = position;

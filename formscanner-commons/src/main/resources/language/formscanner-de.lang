@@ -137,6 +137,7 @@ analyze.files.all.tooltip=Abastung der Bilder
 analyze.files.current.tooltip=Wiederholung der laufenden Bildabtastung
 results.grid.frame.title=Ergebnisse
 results=Ergebnisse
+review.results=Ergebnisse prüfen
 options.frame.title=Optionen
 template.not.saved=Schablone nicht gespeichert
 template.not.saved.popup=Schablone

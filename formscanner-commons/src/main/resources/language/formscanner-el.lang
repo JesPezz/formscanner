@@ -137,6 +137,7 @@ analyze.files.all.tooltip=Έναρξη σάρωσης όλων των εικόν
 analyze.files.current.tooltip=Επανασάρωση τρέχουσας εικόνας
 results.grid.frame.title=Αποτελέσματα
 results=Αποτελέσματα
+review.results=Έλεγχος αποτελεσμάτων
 options.frame.title=Επιλογές
 square=Τετράγωνο
 circle=Κύκλος

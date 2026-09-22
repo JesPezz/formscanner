@@ -137,6 +137,7 @@ analyze.files.all.tooltip=Lancer l'anayse de toutes les images
 analyze.files.current.tooltip=Analyser à nouveau l'image courante
 results.grid.frame.title=Résultats
 results=Résultats
+review.results=Vérifier les résultats
 options.frame.title=Options
 square=Carré
 circle=Cercle

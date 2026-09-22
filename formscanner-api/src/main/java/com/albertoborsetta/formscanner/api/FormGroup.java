@@ -1,6 +1,7 @@
 package com.albertoborsetta.formscanner.api;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
 *
@@ -8,8 +9,8 @@ import java.util.HashMap;
 */
 public class FormGroup {
 
-	private HashMap<String, FormQuestion> fields;
-	private HashMap<String, FormArea> areas;
+	private LinkedHashMap<String, FormQuestion> fields;
+	private LinkedHashMap<String, FormArea> areas;
 	private int lastFieldIndex;
 
 	/**
@@ -18,8 +19,8 @@ public class FormGroup {
 	 * @author Alberto Borsetta
 	 */
 	public FormGroup() {
-		fields = new HashMap<>();
-		areas = new HashMap<>();
+		fields = new LinkedHashMap<>();
+		areas = new LinkedHashMap<>();
 		lastFieldIndex = 1;
 	}
 

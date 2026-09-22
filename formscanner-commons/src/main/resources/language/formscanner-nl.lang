@@ -137,6 +137,7 @@ analyze.files.all.tooltip=Start scannen alle afbeeldingen
 analyze.files.current.tooltip=Huidige afbeelding opnieuw scannen
 results.grid.frame.title=Resultaten
 results=Resultaten
+review.results=Resultaten controleren
 options.frame.title=Opties
 square=Vierkant
 circle=Cirkel

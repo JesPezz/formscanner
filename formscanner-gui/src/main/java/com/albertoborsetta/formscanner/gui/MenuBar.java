@@ -41,6 +41,7 @@ public final class MenuBar extends JMenuBar implements MenuView {
 	private JMenuItem loadTemplateMenuItem;
 	private JMenuItem scanAllMenuItem;
 	private JMenuItem scanMenuItem;
+	private JMenuItem reviewResultsMenuItem;
 	private final ComponentOrientation orientation;
 
 	public MenuBar(final FormScannerModel model) {
@@ -162,6 +163,14 @@ public final class MenuBar extends JMenuBar implements MenuView {
 								.getIconFor(FormScannerResourcesKeys.ANALYZE_FILES_ICON_16))
 				.setEnabled(false).build();
 
+		reviewResultsMenuItem = new MenuItemBuilder(
+				FormScannerTranslation
+						.getTranslationFor(FormScannerTranslationKeys.REVIEW_RESULTS),
+				orientation)
+				.withActionCommand(FormScannerConstants.REVIEW_RESULTS)
+				.withActionListener(formScannerController)
+				.build();
+
 		return new MenuBuilder(
 				FormScannerTranslation
 						.getTranslationFor(FormScannerTranslationKeys.EDIT_MENU),
@@ -170,7 +179,9 @@ public final class MenuBar extends JMenuBar implements MenuView {
 						FormScannerTranslation
 								.getMnemonicFor(FormScannerTranslationKeys.EDIT_MENU_MNEMONIC))
 				.add(renameMenuItem).add(new JSeparator(JSeparator.HORIZONTAL))
-				.add(scanAllMenuItem).add(scanMenuItem).build();
+				.add(scanAllMenuItem).add(scanMenuItem)
+				.add(new JSeparator(JSeparator.HORIZONTAL))
+				.add(reviewResultsMenuItem).build();
 	}
 
 	public JMenu getTemplateMenu() {

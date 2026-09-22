@@ -137,6 +137,7 @@ analyze.files.all.tooltip=Avvia scansione immagini
 analyze.files.current.tooltip=Ripeti scansione immagine corrente
 results.grid.frame.title=Risultati
 results=Risultati
+review.results=Rivedi i risultati
 options.frame.title=Opzioni
 template.not.saved=Errore non salvato
 template.not.saved.popup=Template

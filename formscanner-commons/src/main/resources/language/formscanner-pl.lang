@@ -137,6 +137,7 @@ analyze.files.all.tooltip= Skanuj wszystkie obrazy
 analyze.files.current.tooltip=Ponownie skanuj obraz
 results.grid.frame.title=Wyniki
 results=Wyniki
+review.results=Sprawdź wyniki
 options.frame.title=Opcje
 square=Kwadrat
 circle=Koło

@@ -67,7 +67,7 @@ public class ResultsGridFrame extends InternalFrame {
 	/**
 	 * Multiline Table Cell Renderer.
 	 */
-	public class MultilineTableCellRenderer extends JTextArea
+	public static class MultilineTableCellRenderer extends JTextArea
 			implements TableCellRenderer {
 
 		/**
@@ -76,8 +76,10 @@ public class ResultsGridFrame extends InternalFrame {
 		private static final long serialVersionUID = 1L;
 
 		private final ArrayList<ArrayList<Integer>> rowColHeight = new ArrayList<>();
+		private final FormScannerModel model;
 
-		public MultilineTableCellRenderer() {
+		public MultilineTableCellRenderer(FormScannerModel model) {
+			this.model = model;
 			setLineWrap(true);
 			setWrapStyleWord(true);
 			setOpaque(true);
@@ -252,7 +254,7 @@ public class ResultsGridFrame extends InternalFrame {
 
 		JTable newTable = new JTable(tableModel, columnModel);
 		newTable.setDefaultRenderer(
-				Object.class, new MultilineTableCellRenderer());
+				Object.class, new MultilineTableCellRenderer(model));
 
 		int c = 0;
 		if (model.isGroupsEnabled()) {

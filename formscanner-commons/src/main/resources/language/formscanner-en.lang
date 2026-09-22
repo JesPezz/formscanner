@@ -137,6 +137,7 @@ analyze.files.all.tooltip=Start all images scan
 analyze.files.current.tooltip=Re-scan current image
 results.grid.frame.title=Results
 results=Results
+review.results=Review results
 options.frame.title=Options
 square=Square
 circle=Circle

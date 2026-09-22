@@ -137,6 +137,7 @@ analyze.files.all.tooltip=بدء مسح جميع الصور
 analyze.files.current.tooltip=إعادة مسح الصورة الحالية
 results.grid.frame.title=النتائج
 results=النتائج
+review.results=مراجعة النتائج
 options.frame.title=الخيارات
 square=مربع
 circle=دائرة

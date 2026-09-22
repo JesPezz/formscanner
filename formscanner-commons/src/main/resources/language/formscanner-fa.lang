@@ -137,6 +137,7 @@ analyze.files.all.tooltip=همه پاسخنامه ها را تصحيح کن
 analyze.files.current.tooltip=اين پاسخنامه را مجددا تصحيح کن
 results.grid.frame.title=نتايج
 results=نتايج
+review.results=بازبینی نتایج
 options.frame.title=تنطيمات
 square=مربع
 circle=دايره

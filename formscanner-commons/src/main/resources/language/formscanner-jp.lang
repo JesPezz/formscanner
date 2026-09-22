@@ -137,6 +137,7 @@ analyze.files.all.tooltip=全画像をスキャン
 analyze.files.current.tooltip=最後の画像を再スキャン
 results.grid.frame.title=結果
 results=結果
+review.results=結果を確認
 options.frame.title=設定
 square=四角型
 circle=丸型

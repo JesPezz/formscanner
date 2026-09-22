@@ -43,6 +43,7 @@ public class FormScannerConstants extends Constants {
 	public static final String FONT_TYPE = "FONT_TYPE";
 	public static final String FONT_SIZE = "FONT_SIZE";
 	public static final String LOOK_AND_FEEL = "LOOK_AND_FEEL";
+	public static final String REVIEW_RESULTS = "REVIEW_RESULTS";
 	public static final String SHAPE_TYPE = "SHAPE_TYPE";
 
 	// Frames
@@ -54,6 +55,7 @@ public class FormScannerConstants extends Constants {
 	public static final String DESKTOP_NAME = "DESKTOP";
 	public static final String OPTIONS_FRAME_NAME = "OPTIONS";
 	public static final String RESULTS_GRID_FRAME_NAME = "RESULTS_GRID_FRAME_NAME";
+	public static final String REVIEW_RESULTS_FRAME_NAME = "REVIEW_RESULTS_FRAME_NAME";
 
 	// Frames positions and size
 	private static final Rectangle FILE_LIST_FRAME_POSITION = new Rectangle(10, 10, 200, 600);
@@ -61,6 +63,7 @@ public class FormScannerConstants extends Constants {
 	private static final Rectangle MANAGE_TEMPLATE_FRAME_POSITION = new Rectangle(100, 100, 600, 500);
 	private static final Rectangle IMAGE_FRAME_POSITION = new Rectangle(10, 10, 1000, 600);
 	private static final Rectangle RESULTS_GRID_FRAME_POSITION = new Rectangle(100, 100, 230, 300);
+	private static final Rectangle REVIEW_RESULTS_FRAME_POSITION = new Rectangle(100, 100, 640, 480);
 	private static final Rectangle ABOUT_FRAME_POSITION = new Rectangle(100, 100, 600, 500);
 	private static final Rectangle OPTIONS_FRAME_POSITION = new Rectangle(100, 100, 400, 500);
 	private static final Rectangle DESKTOP_SIZE = new Rectangle(0, 0, 1024, 768);
@@ -172,7 +175,9 @@ public class FormScannerConstants extends Constants {
 										FormScannerConfigurationKeys.IMAGE_FRAME,
 										IMAGE_FRAME_POSITION), RESULTS_GRID_FRAME(RESULTS_GRID_FRAME_NAME,
 												FormScannerConfigurationKeys.RESULTS_GRID_FRAME,
-												RESULTS_GRID_FRAME_POSITION), OPTIONS_FRAME(OPTIONS_FRAME_NAME,
+												RESULTS_GRID_FRAME_POSITION), REVIEW_RESULTS_FRAME(REVIEW_RESULTS_FRAME_NAME,
+														FormScannerConfigurationKeys.REVIEW_RESULTS_FRAME,
+														REVIEW_RESULTS_FRAME_POSITION), OPTIONS_FRAME(OPTIONS_FRAME_NAME,
 														FormScannerConfigurationKeys.OPTIONS_FRAME,
 														OPTIONS_FRAME_POSITION), ABOUT_FRAME(ABOUT_FRAME_NAME,
 																FormScannerConfigurationKeys.ABOUT_FRAME,
@@ -231,6 +236,7 @@ public class FormScannerConstants extends Constants {
 		SAVE_OPTIONS, 
 		ANALYZE_FILES_ALL, 
 		ANALYZE_FILES_CURRENT, 
+		REVIEW_RESULTS,
 		IS_MULTIPLE, 
 		GROUPS_ENABLED, 
 		RESET_AUTO_NUMBERING, 

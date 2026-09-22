@@ -136,6 +136,7 @@ analyze.files.all.tooltip=Comece a digitalizar todas as imagens
 analyze.files.current.tooltip=Reescanear imagem atual
 results.grid.frame.title=Resultados
 results=Resultados
+review.results=Revisar resultados
 options.frame.title=Opções
 square=Quadrado
 circle=Círculo

@@ -49,6 +49,9 @@ public class FormScannerController implements ActionListener, WindowListener {
             case ANALYZE_FILES_CURRENT:
                 model.analyzeFiles(FormScannerConstants.ANALYZE_FILES_CURRENT);
                 break;
+            case REVIEW_RESULTS:
+                model.createReviewResultsFrame();
+                break;
             case LOAD_TEMPLATE:
                 model.loadTemplate();
                 break;
