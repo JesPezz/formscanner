@@ -94,6 +94,7 @@ template.saved=Schablone korrekt gespeichert
 first.csv.column=Dateiname
 results.default.file=Ergebnisse der Abtastung
 csv.file=CSV Datei(*.csv)
+xlsx.file=Excel file (*.xlsx)
 help=Hilfe
 about=Über
 help.menu=Hilfe

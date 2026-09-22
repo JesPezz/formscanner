@@ -94,6 +94,7 @@ template.saved=کليد ديجيتالي پاسخنامه به صورت موفق
 first.csv.column=نام فايل
 results.default.file=نتايج اسکن
 csv.file=CSV file (*.csv)
+xlsx.file=Excel file (*.xlsx)
 help=راهنما
 about=درباره
 help.menu=راهنما

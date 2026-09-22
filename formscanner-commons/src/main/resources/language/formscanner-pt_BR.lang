@@ -93,6 +93,7 @@ template.saved=Modelo salvado com sucesso
 first.csv.column=Nome do arquivo
 results.default.file=Resultados escaneados
 csv.file=Arquivo CSV (*.csv)
+xlsx.file=Excel file (*.xlsx)
 help=Ajuda
 about=Sobre
 help.menu=Ajuda

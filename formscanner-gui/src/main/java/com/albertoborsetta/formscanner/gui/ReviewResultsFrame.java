@@ -1,8 +1,8 @@
 package com.albertoborsetta.formscanner.gui;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Image;
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,6 +21,7 @@ import com.albertoborsetta.formscanner.api.FormGroup;
 import com.albertoborsetta.formscanner.api.FormPoint;
 import com.albertoborsetta.formscanner.api.FormQuestion;
 import com.albertoborsetta.formscanner.api.FormTemplate;
+import com.albertoborsetta.formscanner.api.commons.Constants.ShapeType;
 import com.albertoborsetta.formscanner.commons.FormScannerConstants;
 import com.albertoborsetta.formscanner.commons.translation.FormScannerTranslation;
 import com.albertoborsetta.formscanner.commons.translation.FormScannerTranslationKeys;
@@ -181,9 +182,37 @@ public class ReviewResultsFrame extends InternalFrame {
 			imageLabel.setText(String.valueOf(student));
 			return;
 		}
+		double zoom = 200d / image.getHeight();
+		int targetWidth = Math.max(1, (int) (image.getWidth() * zoom));
 		int targetHeight = 200;
-		int targetWidth = Math.max(1, (int) ((double) image.getWidth() * targetHeight / image.getHeight()));
-		Image scaled = image.getScaledInstance(targetWidth, targetHeight, Image.SCALE_SMOOTH);
-		imageLabel.setIcon(new ImageIcon(scaled));
+		BufferedImage preview = new BufferedImage(targetWidth, targetHeight, BufferedImage.TYPE_INT_RGB);
+		Graphics2D g = preview.createGraphics();
+		g.drawImage(image, 0, 0, targetWidth, targetHeight, null);
+		showResponsePoints(g, String.valueOf(student), zoom);
+		g.dispose();
+		imageLabel.setIcon(new ImageIcon(preview));
+	}
+
+	private void showResponsePoints(Graphics2D g, String student, double zoom) {
+		int marker = (int) (model.getShapeSize() * zoom);
+		for (FormQuestion question : indexQuestions(formForStudent(student)).values()) {
+			for (FormPoint point : question.getPoints().values()) {
+				if (point != null) {
+					int x = (int) (point.getX() * zoom);
+					int y = (int) (point.getY() * zoom);
+					g.setColor(Color.RED);
+					if (model.getShapeType().equals(ShapeType.CIRCLE)) {
+						g.fillArc(x - marker, y - marker, 2 * marker, 2 * marker, 0, 360);
+					} else {
+						g.fillRect(x - marker, y - marker, 2 * marker, 2 * marker);
+					}
+					g.setColor(Color.BLACK);
+				}
+			}
+		}
+	}
+
+	private FormTemplate formForStudent(String student) {
+		return model.getFilledForms().get(student);
 	}
 }

@@ -508,6 +508,23 @@ public class FormScannerModel {
 		view.arrangeFrame(reviewResultsFrame);
 	}
 
+	public void saveResults() {
+		if (filledForms.isEmpty()) {
+			return;
+		}
+		Date today = Calendar.getInstance().getTime();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		File outputFile = new File(resultsPath
+				+ FormScannerTranslation.getTranslationFor(FormScannerTranslationKeys.RESULTS_DEFAULT_FILE)
+				+ "_" + sdf.format(today) + ".xlsx");
+		File savedFile = fileUtils.saveExcelAs(outputFile, filledForms, true);
+		if (savedFile != null) {
+			configurations.setProperty(FormScannerConfigurationKeys.RESULTS_SAVE_PATH,
+					FilenameUtils.getFullPath(savedFile.getAbsolutePath()));
+			configurations.store();
+		}
+	}
+
 	private void updateFileList(Integer index, File file) {
 		openedFiles.remove(index);
 		openedFiles.put(index, file);

@@ -26,6 +26,7 @@ public final class ToolBar extends JPanel implements MenuView {
 	private final FormScannerController formScannerController;
 
 	private JButton openButton;
+	private JButton saveButton;
 	private JButton renameButton;
 	private JButton startButton;
 	private JButton startAllButton;
@@ -73,9 +74,22 @@ public final class ToolBar extends JPanel implements MenuView {
 								.getIconFor(FormScannerResourcesKeys.OPEN_IMAGES_ICON))
 				.build();
 
+		saveButton = new ButtonBuilder(orientation)
+				.withActionCommand(FormScannerConstants.SAVE_RESULTS)
+				.withActionListener(formScannerController)
+				.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null))
+				.withToolTip(
+						FormScannerTranslation
+								.getTranslationFor(FormScannerTranslationKeys.SAVE_RESULTS_TOOLTIP))
+				.withIcon(
+						FormScannerResources
+								.getIconFor(FormScannerResourcesKeys.SAVE_RESULTS_ICON))
+				.build();
+
 		return new ToolBarBuilder(orientation)
 				.withAlignmentY(Component.CENTER_ALIGNMENT)
 				.withAlignmentX(Component.LEFT_ALIGNMENT).add(openButton)
+				.add(saveButton)
 				.build();
 	}
 

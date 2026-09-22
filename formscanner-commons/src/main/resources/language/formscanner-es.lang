@@ -94,6 +94,7 @@ template.saved=Plantilla cargada correctamente
 first.csv.column=Nombre de archivo
 results.default.file=resultados_analisis
 csv.file=arvhivo CSV (*.csv)
+xlsx.file=Excel file (*.xlsx)
 help=Ayuda
 about=Sobre
 help.menu=Ayuda

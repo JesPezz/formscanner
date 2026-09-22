@@ -94,6 +94,7 @@ template.saved=Το πρότυπο αποθηκεύτηκε με επιτυχί�
 first.csv.column=Όνομα αρχείου
 results.default.file=Αποτελέσματα_σάρωσης
 csv.file=Αρχείο CSV (*.csv)
+xlsx.file=Excel file (*.xlsx)
 help=Βοήθεια
 about=Περί
 help.menu=Βοήθεια

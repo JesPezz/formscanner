@@ -94,6 +94,7 @@ template.saved=Modèle sauvegardé avec succès
 first.csv.column=Nom du fichier
 results.default.file=resultats_scan
 csv.file=Fichier CSV (*.csv)
+xlsx.file=Excel file (*.xlsx)
 help=Aide
 about=À propos
 help.menu=Aide

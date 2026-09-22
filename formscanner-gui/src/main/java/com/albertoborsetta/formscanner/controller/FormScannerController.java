@@ -39,6 +39,7 @@ public class FormScannerController implements ActionListener, WindowListener {
                 model.openImages();
                 break;
             case SAVE_RESULTS:
+                model.saveResults();
                 break;
             case ANALYZE_FILES_ALL:
                 model.analyzeFiles(FormScannerConstants.ANALYZE_FILES_ALL);

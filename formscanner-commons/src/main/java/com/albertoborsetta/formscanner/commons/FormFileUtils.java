@@ -200,6 +200,13 @@ public class FormFileUtils extends JFileChooser {
 				FormScannerTranslation.getTranslationFor(FormScannerTranslationKeys.CSV_FILE), "csv");
 		setFileFilter(templateFilter);
 	}
+
+	protected void setExcelFilter() {
+		resetChoosableFileFilters();
+		FileNameExtensionFilter excelFilter = new FileNameExtensionFilter(
+				FormScannerTranslation.getTranslationFor(FormScannerTranslationKeys.XLSX_FILE), "xlsx");
+		setFileFilter(excelFilter);
+	}
 	
 	
 
@@ -284,6 +291,25 @@ public class FormFileUtils extends JFileChooser {
 			logger.debug("Error", e);
 		}
 		return file;
+	}
+
+	public File saveExcelAs(File file, HashMap<String, FormTemplate> filledForms, boolean notify) {
+		if (filledForms == null || filledForms.isEmpty()) {
+			return null;
+		}
+		if (notify) {
+			setMultiSelectionEnabled(false);
+			setExcelFilter();
+			setSelectedFile(file);
+
+			int returnValue = showSaveDialog(null);
+			if (returnValue == JFileChooser.APPROVE_OPTION) {
+				file = getSelectedFile();
+			} else {
+				return null;
+			}
+		}
+		return ExcelExporter.export(file, filledForms);
 	}
 
 	protected static ArrayList<HashMap<String, String>> getResults(HashMap<String, FormTemplate> filledForms,

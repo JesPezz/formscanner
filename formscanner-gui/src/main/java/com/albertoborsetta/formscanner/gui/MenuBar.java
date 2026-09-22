@@ -31,6 +31,7 @@ public final class MenuBar extends JMenuBar implements MenuView {
 	private final FormScannerController formScannerController;
 
 	private JMenuItem openMenuItem;
+	private JMenuItem saveResultsMenuItem;
 	private JMenuItem exitMenuItem;
 	private JMenuItem renameMenuItem;
 	private JMenuItem languageMenuItem;
@@ -82,6 +83,23 @@ public final class MenuBar extends JMenuBar implements MenuView {
 								.getIconFor(FormScannerResourcesKeys.OPEN_IMAGES_ICON_16))
 				.build();
 
+		saveResultsMenuItem = new MenuItemBuilder(
+				FormScannerTranslation
+						.getTranslationFor(FormScannerTranslationKeys.SAVE_RESULTS),
+				orientation)
+				.withActionCommand(FormScannerConstants.SAVE_RESULTS)
+				.withActionListener(formScannerController)
+				.withMnemonic(
+						FormScannerTranslation
+								.getMnemonicFor(FormScannerTranslationKeys.SAVE_RESULTS_MNEMONIC))
+				.withAccelerator(
+						KeyStroke.getKeyStroke(
+								KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK))
+				.withIcon(
+						FormScannerResources
+								.getIconFor(FormScannerResourcesKeys.SAVE_RESULTS_ICON))
+				.build();
+
 		exitMenuItem = new MenuItemBuilder(
 				FormScannerTranslation
 						.getTranslationFor(FormScannerTranslationKeys.EXIT),
@@ -106,7 +124,7 @@ public final class MenuBar extends JMenuBar implements MenuView {
 				.withMnemonic(
 						FormScannerTranslation
 								.getMnemonicFor(FormScannerTranslationKeys.FILE_MENU_MNEMONIC))
-				.add(openMenuItem).add(new JSeparator(JSeparator.HORIZONTAL))
+				.add(openMenuItem).add(saveResultsMenuItem).add(new JSeparator(JSeparator.HORIZONTAL))
 				.add(exitMenuItem).build();
 	}
 

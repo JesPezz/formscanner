@@ -94,6 +94,7 @@ template.saved=Sjabloon met succes opgeslagen
 first.csv.column=Bestandsnaam
 results.default.file=scan_resultaten
 csv.file=CSV file (*.csv)
+xlsx.file=Excel file (*.xlsx)
 help=Hulp
 about=Over
 help.menu=Hulp

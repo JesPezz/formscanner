@@ -94,6 +94,7 @@ template.saved=تم حفظ القالب بنجاح
 first.csv.column=اسم الملف
 results.default.file=مسح النتائج
 csv.file=CSV file (*.csv)
+xlsx.file=Excel file (*.xlsx)
 help=مساعدة
 about=حول
 help.menu=مساعدة

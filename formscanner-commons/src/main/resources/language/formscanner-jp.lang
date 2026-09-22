@@ -94,6 +94,7 @@ template.saved=テンプレートファイルを保存しました
 first.csv.column=ファイル名
 results.default.file=スキャン結果
 csv.file=CSV形式 (*.csv)
+xlsx.file=Excel file (*.xlsx)
 help=ヘルプ
 about=このソフトについて
 help.menu=ヘルプ

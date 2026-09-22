@@ -99,6 +99,7 @@ public class FormScannerTranslationKeys extends TranslationKeys {
 	public static final String FIRST_CSV_COLUMN = "first.csv.column";
 	public static final String RESULTS_DEFAULT_FILE = "results.default.file";
 	public static final String CSV_FILE = "csv.file";
+	public static final String XLSX_FILE = "xlsx.file";
 
 	// Languages
 	public static final String ENGLISH = "english.label";

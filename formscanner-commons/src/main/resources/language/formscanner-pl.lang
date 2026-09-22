@@ -94,6 +94,7 @@ template.saved=Szablon zapisany poprawnie
 first.csv.column=Nazwa pliku
 results.default.file=Wyniki skanowania
 csv.file=plik CSV (*.csv)
+xlsx.file=Excel file (*.xlsx)
 help=Pomoc
 about=O programie
 help.menu=Pomoc
