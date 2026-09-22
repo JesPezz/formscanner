@@ -25,11 +25,25 @@ Bitácora de incidencias del proyecto FormScanner. Formato por entrada:
   plantilla: muestreando las coordenadas brutas sin transformar, la opción C de
   `Question31` está marcada (`ratio ≈ 0.99` en `[2048,1903]`). El defecto está
   en el alineamiento del marco de esquinas, no en los puntos definidos.
-- **Solución:** pendiente. Se abordará en el paso 2/4 del roadmap
-  (generación automática de plantillas y mejora de precisión). Queda registrado
-  como test de regresión `@Disabled` (`OMRSampleTest.muestraTestRegresionBurbujas`):
-  cuando se corrija, `Question31` debe detectar `C`.
+- **Solución:** aplicada 2026-09-21 en el paso 4 del roadmap (precisión).
+  1. `calcResponsePoint` de `FormScannerDetector` pasa de transformación de
+     similitud (rotación+escala uniforme+traslación) a **homografía** de las 4
+     esquinas (DLT, ~30 líneas en el propio detector, sin dependencias):
+     corrige perspectiva, skew, escala X≠Y, rotación y traslación.
+  2. La muestra carecía de marcadores fiables: el contenido (burbujas) está
+     exactamente en las coordenadas de plantilla, pero las esquinas detectadas
+     estaban ~`(14,-67)` px desplazadas (muestra auto-inconsistente: contenido de
+     una impresión, marcadores de otra). Se recalibró el bloque `<corners>` de
+     `samples/test/test_template.xtmpl` con las esquinas reales detectadas
+     (`TL=[189,96] TR=[2337,95] BL=[188,3311] BR=[2333,3304]`), dejando
+     contenido y áreas igual.
+  3. Con la homografía y las esquinas recalibradas, `Question31` se detecta como
+     `C`. Se reactivó el test de regresión (`muestraTestRegresionBurbujas`).
 - **Lección:** la precisión del reconocimiento depende críticamente del
   alineamiento entre las esquinas detectadas y las de la plantilla; un desvío
   pequeño ya rompe los resultados. El asistente de desarrollo no puede inspeccionar
-  visualmente las imágenes: toda verificación debe hacerse programáticamente.
+  visualmente las imágenes: toda verificación debe hacerse programáticamente. Una
+  homografía de 4 esquinas corrige lo que una transformación de similitud no puede
+  (perspectiva/escala asimétrica), pero su resultado es tan fiable como los
+  marcadores de esquina detectados: si la muestra no es físicamente coherente con
+  su plantilla, los resultados siguen desviándose.

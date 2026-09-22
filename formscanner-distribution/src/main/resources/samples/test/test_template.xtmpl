@@ -4,16 +4,16 @@
     <rotation angle="0.001421126471056031"/>
     <corners type="ANGULAR">
         <corner position="TOP_RIGHT">
-            <point x="2314.0" y="160.0"/>
+            <point x="2337.0" y="95.0"/>
         </corner>
         <corner position="TOP_LEFT">
-            <point x="203.0" y="163.0"/>
+            <point x="189.0" y="96.0"/>
         </corner>
         <corner position="BOTTOM_LEFT">
-            <point x="202.0" y="3242.0"/>
+            <point x="188.0" y="3311.0"/>
         </corner>
         <corner position="BOTTOM_RIGHT">
-            <point x="2313.0" y="3237.0"/>
+            <point x="2333.0" y="3304.0"/>
         </corner>
     </corners>
     <fields groups="false" shape="CIRCLE" size="15">

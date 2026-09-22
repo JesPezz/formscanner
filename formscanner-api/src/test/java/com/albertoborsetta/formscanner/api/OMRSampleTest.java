@@ -12,7 +12,6 @@ import java.util.Map;
 
 import javax.imageio.ImageIO;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -91,10 +90,6 @@ public class OMRSampleTest {
 	}
 
 	@Test
-	@Disabled("Bug de precisión documentado en INCIDENTES.md: el desalineamiento "
-			+ "del marco de esquinas (CornerDetector vs plantilla) ubica los "
-			+ "puntos de respuesta fuera de las burbujas en las imágenes test/. "
-			+ "Question31 debería detectar C como valor correcto.")
 	void muestraTestRegresionBurbujas() throws Exception {
 		Map<String, String> values = valuesOf(process(
 				"samples/test/test_template.xtmpl", "samples/test/T00001.jpg"));

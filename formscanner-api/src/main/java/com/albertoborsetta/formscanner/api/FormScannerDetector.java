@@ -7,6 +7,7 @@ package com.albertoborsetta.formscanner.api;
 
 import com.albertoborsetta.formscanner.api.commons.Constants;
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
 
 /**
  *
@@ -56,16 +57,84 @@ public abstract class FormScannerDetector {
     }
 
     protected FormPoint calcResponsePoint(FormPoint responsePoint) {
-        FormPoint point = responsePoint.clone();
+        double[] h = getHomography();
+        double x = responsePoint.getX();
+        double y = responsePoint.getY();
+        double w = (h[6] * x) + (h[7] * y) + h[8];
+        double px = ((h[0] * x) + (h[1] * y) + h[2]) / w;
+        double py = ((h[3] * x) + (h[4] * y) + h[5]) / w;
+        return new FormPoint(px, py);
+    }
 
-        FormPoint templateOrigin = parent.getCorner(Constants.Corners.TOP_LEFT);
-        double templateRotation = parent.getRotation();
-        double scale = Math.sqrt(template.getDiagonal() / parent.getDiagonal());
+    private double[] homography;
 
-        point.rotoTranslate(templateOrigin, templateRotation, true);
-        point.scale(scale);
-        point.rotoTranslate(template.getCorners().get(Constants.Corners.TOP_LEFT), template.getRotation(), false);
-        return point;
+    private double[] getHomography() {
+        if (homography == null) {
+            homography = computeHomography(parent.getCorners(), template.getCorners());
+        }
+        return homography;
+    }
+
+    private static double[] computeHomography(HashMap<Constants.Corners, FormPoint> src,
+            HashMap<Constants.Corners, FormPoint> dst) {
+        double[][] m = new double[8][9];
+        int row = 0;
+        for (Constants.Corners corner : Constants.Corners.values()) {
+            FormPoint s = src.get(corner);
+            FormPoint d = dst.get(corner);
+            fill(m, row, s.getX(), s.getY(), d.getX(), d.getY());
+            row += 2;
+        }
+        return solve(m);
+    }
+
+    private static void fill(double[][] m, int row, double x, double y, double dx, double dy) {
+        m[row][0] = x;
+        m[row][1] = y;
+        m[row][2] = 1;
+        m[row][3] = 0;
+        m[row][4] = 0;
+        m[row][5] = 0;
+        m[row][6] = -dx * x;
+        m[row][7] = -dx * y;
+        m[row][8] = dx;
+        m[row + 1][0] = 0;
+        m[row + 1][1] = 0;
+        m[row + 1][2] = 0;
+        m[row + 1][3] = x;
+        m[row + 1][4] = y;
+        m[row + 1][5] = 1;
+        m[row + 1][6] = -dy * x;
+        m[row + 1][7] = -dy * y;
+        m[row + 1][8] = dy;
+    }
+
+    private static double[] solve(double[][] m) {
+        for (int col = 0; col < 8; col++) {
+            int pivot = col;
+            for (int r = col + 1; r < 8; r++) {
+                if (Math.abs(m[r][col]) > Math.abs(m[pivot][col])) {
+                    pivot = r;
+                }
+            }
+            double[] tmp = m[pivot];
+            m[pivot] = m[col];
+            m[col] = tmp;
+            for (int r = 0; r < 8; r++) {
+                if (r != col && m[r][col] != 0) {
+                    double f = m[r][col] / m[col][col];
+                    for (int c = 0; c < 9; c++) {
+                        m[r][c] -= f * m[col][c];
+                    }
+                }
+            }
+        }
+        double[] h = new double[9];
+        for (int i = 0; i < 8; i++) {
+            h[i] = m[i][8] / m[i][i];
+        }
+        h[8] = 1;
+        return h;
     }
 
     protected int isWhite(int xi, int yi, int[] rgbArray) {
