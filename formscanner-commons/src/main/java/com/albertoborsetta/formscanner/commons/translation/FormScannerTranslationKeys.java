@@ -28,6 +28,10 @@ public class FormScannerTranslationKeys extends TranslationKeys {
 	public static final String LOAD_TEMPLATE_MNEMONIC = "load.template.mnemonic";
 	public static final String LOAD_TEMPLATE_TOOLTIP = "load.template.tooltip";
 
+	public static final String GENERATE_TEMPLATE = "generate.template";
+	public static final String GENERATE_TEMPLATE_MNEMONIC = "generate.template.mnemonic";
+	public static final String GENERATE_TEMPLATE_TOOLTIP = "generate.template.tooltip";
+
 	public static final String EDIT_TEMPLATE = "edit.template";
 	public static final String EDIT_TEMPLATE_MNEMONIC = "edit.template.mnemonic";
 	public static final String EDIT_TEMPLATE_TOOLTIP = "edit.template.tooltip";

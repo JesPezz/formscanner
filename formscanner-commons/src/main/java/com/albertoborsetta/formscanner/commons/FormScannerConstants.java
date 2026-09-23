@@ -28,6 +28,7 @@ public class FormScannerConstants extends Constants {
 	public static final String ANALYZE_FILES_CURRENT = "ANALYZE_FILES_CURRENT";
 	public static final String CREATE_TEMPLATE = "LOAD_TEMPLATE";
 	public static final String LOAD_TEMPLATE = "USE_TEMPLATE";
+	public static final String GENERATE_TEMPLATE = "GENERATE_TEMPLATE";
 	public static final String EDIT_TEMPLATE = "EDIT_TEMPLATE";
 	public static final String CONFIRM = "CONFIRM";
 	public static final String CANCEL = "CANCEL";
@@ -228,6 +229,7 @@ public class FormScannerConstants extends Constants {
 		ABOUT, 
 		LANGUAGE, 
 		EXIT, 
+		GENERATE_TEMPLATE,
 		TOP_LEFT, 
 		TOP_RIGHT, 
 		BOTTOM_LEFT, 

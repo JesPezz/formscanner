@@ -56,6 +56,10 @@ public class ManageTemplateController implements ActionListener,
                 formScannerModel.saveTemplate(true);
                 view.dispose();
                 break;
+            case GENERATE_TEMPLATE:
+                formScannerModel.generateTemplate();
+                view.dispose();
+                break;
             case CONFIRM:
                 view.setupNextTab(FormScannerConstants.CONFIRM);
                 break;

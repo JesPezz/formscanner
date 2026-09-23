@@ -33,6 +33,7 @@ import com.albertoborsetta.formscanner.api.FormArea;
 import com.albertoborsetta.formscanner.api.FormPoint;
 import com.albertoborsetta.formscanner.api.FormQuestion;
 import com.albertoborsetta.formscanner.api.FormTemplate;
+import com.albertoborsetta.formscanner.api.TemplateAutoGenerator;
 import com.albertoborsetta.formscanner.api.commons.Constants.CornerType;
 import com.albertoborsetta.formscanner.api.commons.Constants.Corners;
 import com.albertoborsetta.formscanner.api.commons.Constants.ShapeType;
@@ -601,6 +602,21 @@ public class FormScannerModel {
 				formTemplate.findCorners(templateImage, threshold, density, cornerType, crop);
 				manageTemplateFrame = new ManageTemplateFrame(this);
 
+				view.arrangeFrame(manageTemplateFrame);
+			} catch (Exception e) {
+				logger.debug("Error", e);
+			}
+		}
+	}
+
+	public void generateTemplate() {
+		File imageFile = fileUtils.chooseImage();
+		if (imageFile != null) {
+			try {
+				templateImage = ImageIO.read(imageFile);
+				String name = FilenameUtils.removeExtension(imageFile.getName());
+				formTemplate = TemplateAutoGenerator.generate(templateImage, name);
+				manageTemplateFrame = new ManageTemplateFrame(this);
 				view.arrangeFrame(manageTemplateFrame);
 			} catch (Exception e) {
 				logger.debug("Error", e);

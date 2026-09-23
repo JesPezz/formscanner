@@ -56,6 +56,9 @@ public class FormScannerController implements ActionListener, WindowListener {
             case LOAD_TEMPLATE:
                 model.loadTemplate();
                 break;
+            case GENERATE_TEMPLATE:
+                model.generateTemplate();
+                break;
             case USE_TEMPLATE:
                 model.openTemplate();
                 break;

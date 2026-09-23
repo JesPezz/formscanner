@@ -81,6 +81,7 @@ public class ManageTemplateFrame extends InternalFrame implements TabbedView {
 	private JButton removeFieldButton;
 	private JButton saveTemplateButton;
 	private JButton cancelTemplateButton;
+	private JButton generateAutoButton;
 
 	private JSpinner colsNumber;
 	private JSpinner rowsNumber;
@@ -1116,8 +1117,15 @@ public class ManageTemplateFrame extends InternalFrame implements TabbedView {
 				.withToolTip(FormScannerTranslation.getTranslationFor(FormScannerTranslationKeys.CANCEL_BUTTON_TOOLTIP))
 				.withActionCommand(FormScannerConstants.CANCEL).withActionListener(manageTemplateController).build();
 
+		generateAutoButton = new ButtonBuilder(orientation)
+				.withText("Generar automáticamente")
+				.withToolTip("Genera la plantilla automáticamente desde la imagen")
+				.withActionCommand(FormScannerConstants.GENERATE_TEMPLATE)
+				.withActionListener(manageTemplateController)
+				.build();
+
 		JPanel innerPanel = new PanelBuilder(orientation).withLayout(new SpringLayout()).add(saveTemplateButton)
-				.add(cancelTemplateButton).withGrid(1, 2).build();
+				.add(cancelTemplateButton).add(generateAutoButton).withGrid(1, 3).build();
 
 		return new PanelBuilder(orientation).withLayout(new BorderLayout()).add(innerPanel, BorderLayout.EAST).build();
 	}
