@@ -71,6 +71,9 @@ public class FormScannerController implements ActionListener, WindowListener {
             case ABOUT:
                 model.showAboutFrame();
                 break;
+            case CHECK_FOR_UPDATES:
+                model.checkForUpdates();
+                break;
             case LANGUAGE:
                 JRadioButtonMenuItem object = (JRadioButtonMenuItem) e.getSource();
                 model.setLanguage(object.getName());

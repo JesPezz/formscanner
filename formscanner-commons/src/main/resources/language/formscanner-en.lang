@@ -97,6 +97,7 @@ csv.file=CSV file (*.csv)
 xlsx.file=Excel file (*.xlsx)
 help=Help
 about=About
+check.for.updates=Check for updates...
 help.menu=Help
 help.menu.mnemonic=H
 language=Language

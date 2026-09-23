@@ -38,6 +38,7 @@ public final class MenuBar extends JMenuBar implements MenuView {
 	private JMenuItem optionsMenuItem;
 	private JMenuItem helpMenuItem;
 	private JMenuItem aboutMenuItem;
+	private JMenuItem checkForUpdatesMenuItem;
 	private JMenuItem createTemplateMenuItem;
 	private JMenuItem loadTemplateMenuItem;
 	private JMenuItem generateTemplateMenuItem;
@@ -295,6 +296,14 @@ public final class MenuBar extends JMenuBar implements MenuView {
 								.getIconFor(FormScannerResourcesKeys.ABOUT_ICON_16))
 				.build();
 
+		checkForUpdatesMenuItem = new MenuItemBuilder(
+				FormScannerTranslation
+						.getTranslationFor(FormScannerTranslationKeys.CHECK_FOR_UPDATES),
+				orientation)
+				.withActionCommand(FormScannerConstants.CHECK_FOR_UPDATES)
+				.withActionListener(formScannerController)
+				.build();
+
 		return new MenuBuilder(
 				FormScannerTranslation
 						.getTranslationFor(FormScannerTranslationKeys.HELP_MENU),
@@ -302,7 +311,7 @@ public final class MenuBar extends JMenuBar implements MenuView {
 				.withMnemonic(
 						FormScannerTranslation
 								.getMnemonicFor(FormScannerTranslationKeys.HELP_MENU_MNEMONIC))
-				.add(helpMenuItem).add(aboutMenuItem).build();
+				.add(helpMenuItem).add(checkForUpdatesMenuItem).add(aboutMenuItem).build();
 	}
 
 	public JMenu getSettingsMenu() {

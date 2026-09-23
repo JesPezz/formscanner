@@ -38,6 +38,7 @@ public class FormScannerConstants extends Constants {
 	public static final String EXIT = "EXIT";
 	public static final String HELP = "HELP";
 	public static final String ABOUT = "ABOUT";
+	public static final String CHECK_FOR_UPDATES = "CHECK_FOR_UPDATES";
 	public static final String LANGUAGE = "LANGUAGE";
 	public static final String OPTIONS = "OPTIONS";
 	public static final String CORNER_TYPE = "CORNER_TYPE";
@@ -227,6 +228,7 @@ public class FormScannerConstants extends Constants {
 		ADD_FIELD, 
 		HELP, 
 		ABOUT, 
+		CHECK_FOR_UPDATES, 
 		LANGUAGE, 
 		EXIT, 
 		GENERATE_TEMPLATE,

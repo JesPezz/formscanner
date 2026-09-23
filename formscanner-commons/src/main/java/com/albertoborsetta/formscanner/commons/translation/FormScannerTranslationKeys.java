@@ -122,6 +122,7 @@ public class FormScannerTranslationKeys extends TranslationKeys {
 
 	public static final String HELP = "help";
 	public static final String ABOUT = "about";
+	public static final String CHECK_FOR_UPDATES = "check.for.updates";
 	public static final String HELP_MENU = "help.menu";
 	public static final String HELP_MENU_MNEMONIC = "help.menu.mnemonic";
 	public static final String LANGUAGE = "language";

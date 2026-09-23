@@ -7,9 +7,13 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
 import java.net.URI;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,9 +22,12 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map.Entry;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.commons.io.FilenameUtils;
@@ -622,6 +629,114 @@ public class FormScannerModel {
 				logger.debug("Error", e);
 			}
 		}
+	}
+
+	public void checkForUpdates() {
+		new Thread(() -> checkForUpdatesInBackground()).start();
+	}
+
+	private void checkForUpdatesInBackground() {
+		try {
+			URL url = new URL("https://api.github.com/repos/JesPezz/formscanner/releases/latest");
+			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+			connection.setRequestMethod("GET");
+			connection.setRequestProperty("User-Agent", "FormScanner");
+			connection.setRequestProperty("Accept", "application/vnd.github+json");
+			connection.setConnectTimeout(10000);
+			connection.setReadTimeout(10000);
+
+			int responseCode = connection.getResponseCode();
+			if (responseCode != 200) {
+				showUpdateDialog("Error al consultar actualizaciones (HTTP " + responseCode + ")");
+				connection.disconnect();
+				return;
+			}
+
+			String json = new String(connection.getInputStream().readAllBytes(), "UTF-8");
+			connection.disconnect();
+
+			String remoteVersion = extract("tag_name", json);
+			String downloadUrl = extractFirstJsonUrl(json);
+			String localVersion = FormScannerConstants.VERSION == null ? "1.0.0" : FormScannerConstants.VERSION;
+			remoteVersion = remoteVersion.replaceFirst("^v", "");
+
+			if (compareVersions(remoteVersion, localVersion) > 0) {
+				showUpdateDialog("Nueva versión " + remoteVersion + " disponible" + (downloadUrl != null ? "\n\n¿Descargarla?" : ""), downloadUrl);
+			} else {
+				showUpdateDialog("Ya tienes la última versión (" + localVersion + ")");
+			}
+		} catch (Exception e) {
+			logger.debug("Error comprobando actualizaciones", e);
+			showUpdateDialog("No se pudo comprobar actualizaciones: " + e.getMessage());
+		}
+	}
+
+	private String extract(String key, String json) {
+		Matcher matcher = Pattern.compile("\"" + key + "\"\\s*:\\s*\"([^\"]+)\"").matcher(json);
+		return matcher.find() ? matcher.group(1) : "";
+	}
+
+	private String extractFirstJsonUrl(String json) {
+		Matcher matcher = Pattern.compile("\"browser_download_url\"\\s*:\\s*\"([^\"]+)\"").matcher(json);
+		return matcher.find() ? matcher.group(1) : null;
+	}
+
+	private int compareVersions(String remote, String local) {
+		String[] r = remote.split("\\.");
+		String[] l = local.split("\\.");
+		int max = Math.max(r.length, l.length);
+		for (int i = 0; i < max; i++) {
+			int rv = i < r.length ? Integer.parseInt(r[i].replaceAll("\\D", "")) : 0;
+			int lv = i < l.length ? Integer.parseInt(l[i].replaceAll("\\D", "")) : 0;
+			if (rv != lv) return Integer.compare(rv, lv);
+		}
+		return 0;
+	}
+
+	private void showUpdateDialog(String message) {
+		showUpdateDialog(message, null);
+	}
+
+	private void showUpdateDialog(String message, String downloadUrl) {
+		SwingUtilities.invokeLater(() -> {
+			if (downloadUrl == null) {
+				JOptionPane.showMessageDialog(null, message, "Actualizaciones", JOptionPane.INFORMATION_MESSAGE);
+				return;
+			}
+			int response = JOptionPane.showConfirmDialog(null, message, "Actualizaciones",
+					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+			if (response == JOptionPane.YES_OPTION) {
+				downloadAndRun(downloadUrl);
+			}
+		});
+	}
+
+	private void downloadAndRun(String downloadUrl) {
+		new Thread(() -> {
+			try {
+				URL url = new URL(downloadUrl);
+				HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+				connection.setRequestMethod("GET");
+				connection.setConnectTimeout(10000);
+				connection.setReadTimeout(60000);
+				String fileName = downloadUrl.substring(downloadUrl.lastIndexOf('/') + 1);
+				File target = new File(System.getProperty("user.home") + File.separator + "Downloads", fileName);
+				try (InputStream in = connection.getInputStream();
+						FileOutputStream out = new FileOutputStream(target)) {
+					in.transferTo(out);
+				}
+				connection.disconnect();
+				SwingUtilities.invokeLater(() -> {
+					try {
+						Desktop.getDesktop().open(target);
+					} catch (IOException e) {
+						logger.debug("No se pudo abrir el instalador", e);
+					}
+				});
+			} catch (Exception e) {
+				logger.debug("Error descargando la actualización", e);
+			}
+		}).start();
 	}
 
 	public void createTemplateImageFrame(String fieldsType) {
